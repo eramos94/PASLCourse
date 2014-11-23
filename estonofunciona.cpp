@@ -72,14 +72,27 @@ int arraySum(int numbers[], int from, int to){
 	}
 
 	else if(from == to){
+		
 		return numbers[from];
+	
 	}
 
 	//other wise return the sum of the last element and whatever the sum of the array size: n-1 is
 	else{
+		
 		long a, b;
-		fork2([&]{a = arraySum(numbers, from, to/2);}, [&]{arraySum(numbers, (to/2)+1, to)})
-		//return arraySum(numbers, from, to/2) + arraySum(numbers, (to/2)+1, to);
+		
+		fork2([&]{
+
+			a = arraySum(numbers, from, to/2);
+
+		}, [&]{ 
+
+			b=  arraySum(numbers, (to/2)+1, to);
+
+		});
+
+		return a + b;
 
 	}
 
